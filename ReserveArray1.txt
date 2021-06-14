@@ -1,0 +1,187 @@
+import java.util.Scanner;
+class Reservation
+{ 
+	private String RowA[] = new String[10];
+	private String RowB[] = new String[10];
+	private String RowC[] = new String[10]; 
+	Reservation()
+	{
+		for(int i = 0; i<10;i++)
+		{
+			RowA[i] = "---";
+			RowB[i] = "---";
+			RowC[i] = "---";
+		}
+	}
+	
+	void ShowMng(int position)
+	{
+		if(position == 1)
+		{
+
+			this.ShowS();
+		}
+		else if(position == 2)
+		{
+			this.ShowA();
+		}
+		else if(position == 3)
+		{
+			this.ShowB();
+		}
+	}
+	void ShowS()
+	{
+		System.out.println("S>>");
+		for(int i = 0; i < 10;i++)
+		{
+			System.out.print(RowA[i] + " ");
+		}
+		System.out.println("");
+	}
+	void ShowA()
+	{
+		System.out.println("A>>");
+		for(int i = 0; i < 10;i++)
+		{
+			System.out.print(RowB[i] + " ");
+		}
+		System.out.println("");
+	}
+	void ShowB()
+	{
+		System.out.println("B>>");
+		for(int i = 0; i < 10;i++)
+		{
+			System.out.print(RowC[i] + " ");
+		}
+		System.out.println("");
+	}
+	
+	
+	int Setuser(String Name,int Num,int position)
+	{
+		if(position == 1)
+		{
+			this.RowA[Num] = Name;
+		}
+		else if(position == 2)
+		{
+			this.RowB[Num] = Name;			
+		}
+		else if(position == 3)
+		{
+			this.RowC[Num] = Name;
+		}
+		return 0;
+	}
+	
+	void Lookup()
+	{
+		System.out.println("S>>");
+		for(int i = 0; i < 10;i++)
+		{
+			System.out.print(this.RowA[i] + " ");
+		}
+		System.out.println("");
+		System.out.println("A>>");
+		for(int i = 0; i < 10;i++)
+		{
+			System.out.print(	this.RowB[i] + " ");
+		}
+		System.out.println("");
+		System.out.println("B>>");
+		for(int i = 0; i < 10;i++)
+		{
+			System.out.print(	this.RowC[i] + " ");
+		}
+		System.out.println("\n <<<조회를 완료하였습니다.>>>");
+	}
+	
+	void Cancelres(int position,String name)
+	{
+		if(position == 1)
+		{
+			for(int i = 0; i < 10;i++)
+			{
+				if(	this.RowA[i].equals(name))
+				{
+					this.RowA[i] = "---";
+				}
+			}
+		}
+		else if(position == 2)
+		{
+			for(int i = 0; i < 10;i++)
+			{
+				if(	this.RowA[i].equals(name))
+				{
+					this.RowB[i] = "---";
+				}
+			}
+		}
+		else if(position == 3)
+		{
+			for(int i = 0; i < 10;i++)
+			{
+				if(	this.RowA[i].equals(name))
+				{
+					this.RowC[i] = "---";
+				}
+			}
+		}
+	}
+}
+public class Java1_10 {
+
+	
+	public static void main(String[] args)
+	{
+		Scanner sc = new Scanner(System.in);
+		Reservation res = new Reservation();
+
+		System.out.println("명품콘서트홀 예약 시스템입니다.");
+	
+		while(true)
+		{		
+			System.out.print("예약:1, 조회:2, 취소:3, 끝내기:4 >>");
+			int num = sc.nextInt();
+			if(num == 4)
+			{
+				break;
+			}
+			if(num == 1)
+			{
+				System.out.print("좌석구분 S(1) A(2) B(3)>>");
+				int position = sc.nextInt();
+				
+				res.ShowMng(position);
+				
+				System.out.print("이름>>");
+				String name = sc.next();
+				System.out.print("번호>>");
+				int posx = sc.nextInt();
+				res.Setuser(name,posx-1,position);				
+				 
+			}
+			else if(num ==2 )
+			{
+				res.Lookup();
+			}
+			else if(num == 3)
+			{
+				System.out.print("좌석구분 S(1) A(2) B(3)>>");
+				int position = sc.nextInt();
+				
+				res.ShowMng(position);
+				
+				System.out.print("이름>>");
+				String name = sc.next();
+				res.Cancelres(position, name);
+				 
+			}
+			
+		}
+		sc.close();
+	}
+}
